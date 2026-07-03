@@ -1,41 +1,42 @@
 {
   "sources": [
     {
-      "id": "competitor-business-price",
-      "name": "Competitor A / тариф Business",
+      "id": "wb-macadamia-672171989",
+      "name": "Макадамия в скорлупе 1кг (FASL, 672171989)",
       "type": "number",
-      "field": "competitor.business_price",
-      "unit": "руб.",
-      "medium_change_pct": 3,
-      "high_change_pct": 7,
+      "field": "wildberries.macadamia_672171989_price",
+      "unit": "BYN",
+      "medium_change_pct": 5,
+      "high_change_pct": 15,
       "direction": "any",
-      "action": "Проверить собственный тариф и рекламное предложение."
+      "action": "Сравнить с ценой поставщика, оценить маржу.",
+      "fetch": {
+        "mode": "browser",
+        "url": "https://www.wildberries.by/catalog/672171989/detail.aspx",
+        "css": ".priceBlockFinalPrice--iToZR",
+        "wait": 5,
+        "extract": "price"
+      }
     },
     {
-      "id": "competitor-business-availability",
-      "name": "Competitor A / наличие тарифа",
+      "id": "wb-macadamia-672171989-available",
+      "name": "Макадамия в скорлупе 1кг — наличие",
       "type": "boolean",
-      "field": "competitor.business_available",
+      "field": "wildberries.macadamia_672171989_available",
       "high_when": false,
-      "action": "Проверить причину снятия предложения и реакцию рынка."
-    },
-    {
-      "id": "market-news",
-      "name": "Новости рынка",
-      "type": "text",
-      "field": "market.latest_news",
-      "critical_keywords": [
-        "повышение цен",
-        "новый тариф",
-        "закрытие",
-        "санкции"
-      ],
-      "action": "Оценить влияние новости на продукт, цены и коммуникацию."
+      "action": "Товар пропал — проверить причину и альтернативы.",
+      "fetch": {
+        "mode": "browser",
+        "url": "https://www.wildberries.by/catalog/672171989/detail.aspx",
+        "css": ".priceBlockFinalPrice--iToZR",
+        "wait": 5,
+        "extract": "availability"
+      }
     }
   ],
   "fetch": {
     "timeout_seconds": 30,
-    "user_agent": "WebRadar/1.0 (Monitoring Agent)",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
     "retry_count": 2
   }
 }

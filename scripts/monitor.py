@@ -19,6 +19,19 @@ from pathlib import Path
 if sys.stdout.encoding != 'utf-8':
     sys.stdout.reconfigure(encoding='utf-8')
 
+# Импортируем fetch-функции для fetch-and-update
+from importlib import import_module
+_fetch_mod = import_module("fetch", package=None)
+import importlib.util
+_fetch_path = Path(__file__).resolve().parent / "fetch.py"
+_spec = importlib.util.spec_from_file_location("fetch", _fetch_path)
+_fetch_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_fetch_mod)
+fetch_url = _fetch_mod.fetch_url
+fetch_browser = _fetch_mod.fetch_browser
+fetch_api = _fetch_mod.fetch_api
+fetch_file = _fetch_mod.fetch_file
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "config" / "sources.json"
 SOURCE_PATH = ROOT / "data" / "demo-source.json"
@@ -328,6 +341,122 @@ def status():
     }, ensure_ascii=False, indent=2))
 
 
+def parse_price_from_text(text: str) -> float:
+    """Извлечь числовое значение цены из текста.
+
+    Поддерживает форматы: '29,08 BYN', '4 990 руб.', '3 990', '29.08'
+    """
+    import re
+    # Убираем всё, кроме цифр, запятых, точек и пробелов
+    cleaned = re.sub(r'[^\d.,\s]', '', text)
+    # Заменяем запятую на точку
+    cleaned = cleaned.replace(',', '.')
+    # Убираем пробелы как разделители тысяч
+    cleaned = cleaned.replace(' ', '')
+    # Ищем число
+    match = re.search(r'[\d.]+', cleaned)
+    if match:
+        try:
+            return float(match.group())
+        except ValueError:
+            return 0
+    return 0
+
+
+def fetch_and_update():
+    """Обновить данные из внешних источников и запустить check."""
+    config = load_json(CONFIG_PATH)
+    current = load_json(SOURCE_PATH)
+
+    fetch_config = config.get("fetch", {})
+    sources = config.get("sources", [])
+    updated = {}
+    errors = []
+
+    for source in sources:
+        fetch_info = source.get("fetch")
+        if not fetch_info:
+            # Нет инструкции по сбору — пропускаем
+            continue
+
+        mode = fetch_info["mode"]
+        url = fetch_info["url"]
+        css = fetch_info.get("css")
+        wait_seconds = fetch_info.get("wait", 5)
+        extract = fetch_info.get("extract", "text")
+        field = source["field"]
+
+        try:
+            if mode == "browser":
+                result = fetch_browser(url, selector=css, wait=wait_seconds, user_agent=fetch_config.get("user_agent"))
+            elif mode == "url":
+                result = fetch_url(url, selector=css, timeout=fetch_config.get("timeout_seconds", 30), user_agent=fetch_config.get("user_agent"))
+            elif mode == "api":
+                result = fetch_api(url, timeout=fetch_config.get("timeout_seconds", 30), user_agent=fetch_config.get("user_agent"))
+            elif mode == "file":
+                result = fetch_file(url)
+            else:
+                errors.append({"source": source["id"], "error": f"Неизвестный режим: {mode}"})
+                continue
+        except Exception as e:
+            errors.append({"source": source["id"], "error": str(e)})
+            continue
+
+        if "error" in result:
+            errors.append({"source": source["id"], "error": result["error"]})
+            continue
+
+        # Извлечь значение из результата
+        value = None
+
+        if mode == "browser" and css:
+            results = result.get("results", [])
+            if results:
+                text = results[0].get("text", "").strip()
+                if source["type"] == "number" and extract == "price":
+                    value = parse_price_from_text(text)
+                elif source["type"] == "boolean" and extract == "availability":
+                    # Если элемент найден — товар доступен
+                    value = True
+                else:
+                    value = text
+            elif source["type"] == "boolean" and extract == "availability":
+                # Элемент не найден — товар недоступен
+                value = False
+        elif mode == "api":
+            # Для API — пытаемся найти поле в данных
+            data = result.get("data", {})
+            if isinstance(data, dict):
+                value = data
+        elif mode == "file":
+            value = result.get("data", {})
+
+        if value is not None:
+            # Записать в current по dot-пути
+            parts = field.split(".")
+            obj = current
+            for part in parts[:-1]:
+                if part not in obj:
+                    obj[part] = {}
+                obj = obj[part]
+            obj[parts[-1]] = value
+            updated[source["id"]] = {"value": value, "name": source["name"]}
+
+    # Сохранить обновлённые данные
+    current["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_json(SOURCE_PATH, current)
+
+    print(json.dumps({
+        "status": "data_updated",
+        "updated_sources": updated,
+        "errors": errors,
+        "message": f"Обновлено: {len(updated)}, ошибок: {len(errors)}",
+    }, ensure_ascii=False, indent=2))
+
+    # Запустить check после обновления
+    check()
+
+
 def main():
     command = sys.argv[1] if len(sys.argv) > 1 else "check"
     if command == "check":
@@ -336,8 +465,10 @@ def main():
         digest()
     elif command == "status":
         status()
+    elif command == "fetch-and-update":
+        fetch_and_update()
     else:
-        raise SystemExit("Использование: monitor.py [check|digest|status]")
+        raise SystemExit("Использование: monitor.py [check|digest|status|fetch-and-update]")
 
 
 if __name__ == "__main__":

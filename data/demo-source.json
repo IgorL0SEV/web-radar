@@ -1,10 +1,7 @@
 {
-  "competitor": {
-    "business_price": 3990,
-    "business_available": true
+  "wildberries": {
+    "macadamia_672171989_price": 29.08,
+    "macadamia_672171989_available": true
   },
-  "market": {
-    "latest_news": "Рынок работает без существенных изменений."
-  },
-  "updated_at": "2026-07-03T18:57:56.967639+00:00"
+  "updated_at": "2026-07-03T19:16:25.937918+00:00"
 }

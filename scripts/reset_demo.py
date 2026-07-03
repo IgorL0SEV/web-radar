@@ -13,12 +13,9 @@ if sys.stdout.encoding != 'utf-8':
 ROOT = Path(__file__).resolve().parents[1]
 
 SOURCE = {
-    "competitor": {
-        "business_price": 4990,
-        "business_available": True,
-    },
-    "market": {
-        "latest_news": "Рынок работает без существенных изменений.",
+    "wildberries": {
+        "macadamia_672171989_price": 0,
+        "macadamia_672171989_available": True,
     },
     "updated_at": "2026-07-01T09:00:00+03:00",
 }
@@ -52,7 +49,7 @@ def main():
         "# Сводка пока не сформирована\n", encoding="utf-8",
     )
 
-    print("Демонстрация сброшена: цена 4 990 руб., тариф доступен, критических новостей нет.")
+    print("Демонстрация сброшена. Запустите fetch-and-update для загрузки реальных данных.")
 
 
 if __name__ == "__main__":
