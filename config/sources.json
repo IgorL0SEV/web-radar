@@ -1,0 +1,41 @@
+{
+  "sources": [
+    {
+      "id": "competitor-business-price",
+      "name": "Competitor A / тариф Business",
+      "type": "number",
+      "field": "competitor.business_price",
+      "unit": "руб.",
+      "medium_change_pct": 3,
+      "high_change_pct": 7,
+      "direction": "any",
+      "action": "Проверить собственный тариф и рекламное предложение."
+    },
+    {
+      "id": "competitor-business-availability",
+      "name": "Competitor A / наличие тарифа",
+      "type": "boolean",
+      "field": "competitor.business_available",
+      "high_when": false,
+      "action": "Проверить причину снятия предложения и реакцию рынка."
+    },
+    {
+      "id": "market-news",
+      "name": "Новости рынка",
+      "type": "text",
+      "field": "market.latest_news",
+      "critical_keywords": [
+        "повышение цен",
+        "новый тариф",
+        "закрытие",
+        "санкции"
+      ],
+      "action": "Оценить влияние новости на продукт, цены и коммуникацию."
+    }
+  ],
+  "fetch": {
+    "timeout_seconds": 30,
+    "user_agent": "WebRadar/1.0 (Monitoring Agent)",
+    "retry_count": 2
+  }
+}

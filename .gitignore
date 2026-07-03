@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Data & state (runtime)
+data/state.json
+logs/events.jsonl
+reports/latest-report.md
+reports/daily-digest.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# OpenClaw
+.openclaw/
