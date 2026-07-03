@@ -93,8 +93,11 @@ python scripts/monitor.py status    # Показать текущее состо
 ### fetch.py
 
 ```bash
-# HTML-страница с CSS-селектором
+# HTML-страница с CSS-селектором (статический HTML)
 python scripts/fetch.py url https://example.com --css ".price"
+
+# SPA-сайт через Playwright (Wildberries, Ozon и т.п.)
+python scripts/fetch.py browser "https://www.wildberries.by/catalog/672171989/detail.aspx" --css "[class*='price']" --wait 5
 
 # REST API
 python scripts/fetch.py api https://api.example.com/data

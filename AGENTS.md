@@ -54,9 +54,25 @@ NO_REPLY
 Для получения данных из внешних источников используй:
 
 ```bash
+# Статический HTML (простые сайты)
 python scripts/fetch.py url <url> [--css <selector>]
+
+# SPA-сайты (JavaScript-рендеринг) — Wildberries, Ozon и т.п.
+python scripts/fetch.py browser <url> [--css <selector>] [--wait <seconds>]
+
+# REST API
 python scripts/fetch.py api <url> [--method GET|POST] [--data <json>]
+
+# Локальный файл
 python scripts/fetch.py file <path>
+```
+
+Режим `browser` использует Playwright (headless Chromium) — обязателен для сайтов, рендерящих контент через JavaScript (Wildberries, Ozon, и т.д.).
+
+Пример получения цены с Wildberries:
+
+```bash
+python scripts/fetch.py browser "https://www.wildberries.by/catalog/672171989/detail.aspx" --css "[class*='price']" --wait 5
 ```
 
 Для обработки документов:
