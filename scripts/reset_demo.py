@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 """
 web-radar reset_demo — сброс всех данных до начального состояния.
+
+Устанавливает базовые цены WB BY для демо-цикла:
+  Макадамия: 29,08 BYN
+  Фисташки:  58,53 BYN
 """
 
 import json
@@ -14,9 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 SOURCE = {
     "wildberries": {
-        "macadamia_672171989_price": 0,
+        "macadamia_672171989_price": 29.08,
         "macadamia_672171989_available": True,
-        "pistachio_1164358226_price": 0,
+        "pistachio_1164358226_price": 58.53,
         "pistachio_1164358226_available": True,
     },
     "updated_at": "2026-07-01T09:00:00+03:00",
@@ -51,7 +55,7 @@ def main():
         "# Сводка пока не сформирована\n", encoding="utf-8",
     )
 
-    print("Демонстрация сброшена. Запустите fetch-and-update для загрузки реальных данных.")
+    print("✅ Сброшено. Базовые цены: макадамия 29,08 BYN, фисташки 58,53 BYN.")
 
 
 if __name__ == "__main__":
