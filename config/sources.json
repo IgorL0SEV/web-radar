@@ -32,6 +32,39 @@
         "wait": 5,
         "extract": "availability"
       }
+    },
+    {
+      "id": "wb-pistachio-1164358226",
+      "name": "Фисташки жареные солёные 1кг (Vitaminka, 1164358226)",
+      "type": "number",
+      "field": "wildberries.pistachio_1164358226_price",
+      "unit": "BYN",
+      "medium_change_pct": 5,
+      "high_change_pct": 15,
+      "direction": "any",
+      "action": "Сравнить с ценой поставщика, оценить маржу.",
+      "fetch": {
+        "mode": "browser",
+        "url": "https://www.wildberries.by/catalog/1164358226/detail.aspx",
+        "css": ".priceBlockFinalPrice--iToZR",
+        "wait": 5,
+        "extract": "price"
+      }
+    },
+    {
+      "id": "wb-pistachio-1164358226-available",
+      "name": "Фисташки жареные солёные 1кг — наличие",
+      "type": "boolean",
+      "field": "wildberries.pistachio_1164358226_available",
+      "high_when": false,
+      "action": "Товар пропал — проверить причину и альтернативы.",
+      "fetch": {
+        "mode": "browser",
+        "url": "https://www.wildberries.by/catalog/1164358226/detail.aspx",
+        "css": ".priceBlockFinalPrice--iToZR",
+        "wait": 5,
+        "extract": "availability"
+      }
     }
   ],
   "fetch": {

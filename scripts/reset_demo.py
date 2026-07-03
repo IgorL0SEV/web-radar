@@ -16,6 +16,8 @@ SOURCE = {
     "wildberries": {
         "macadamia_672171989_price": 0,
         "macadamia_672171989_available": True,
+        "pistachio_1164358226_price": 0,
+        "pistachio_1164358226_available": True,
     },
     "updated_at": "2026-07-01T09:00:00+03:00",
 }
