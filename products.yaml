@@ -1,0 +1,20 @@
+# Products config for web-radar monitor
+
+wb:
+  - nmId: 672171989
+    name: "Орехи макадамия 1 кг в скорлупе 5а натуральные FASL"
+    url: "https://www.wildberries.by/catalog/672171989/detail.aspx"
+
+  - nmId: 1164358226
+    name: "Фисташки жареные солёные 1 кг (Vitaminka Candy)"
+    url: "https://www.wildberries.by/catalog/1164358226/detail.aspx"
+
+  - nmId: 28443957
+    name: "Кедровые орехи в скорлупе неочищенные 900г (Сибирский кедр)"
+    url: "https://www.wildberries.by/catalog/28443957/detail.aspx"
+
+onliner:
+  - key: "5908252006465"
+    name: "Finish Quantum Lemon 100 шт (капсулы для ПМ)"
+    url: "https://catalog.onliner.by/dishwashertablet/finish/5908252006465"
+    prices_url: "https://catalog.onliner.by/dishwashertablet/finish/5908252006465/prices"

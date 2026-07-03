@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Environment
+.env
+
+# Cache and temp
+*.html
+*.png
+openclaw-workspace-state.json
+
+# Debug scripts (one-off)
+wb_basket.py
+wb_card.py
+wb_detail.py
+wb_detail2.py
+wb_fetch.py
+wb_fetch_product.py
+wb_final.py
+wb_find.py
+wb_page_*.html
+wb_playwright.py
+wb_price_verify.py
+wb_product_*.html
+wb_product_*.png
+wb_pw2.py
+wb_scrape.py
+wb_search.py
+wb_search2.py
+wb_search_by.py
+onliner_9800x3d.py
+onliner_debug.py
+onliner_top3.py
+
+# OS
+Thumbs.db
+.DS_Store

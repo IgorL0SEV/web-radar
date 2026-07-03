@@ -1,0 +1,67 @@
+{
+  "wb": {
+    "672171989": {
+      "name": "Орехи макадамия 1 кг в скорлупе 5а натуральные",
+      "last_price": 29.08,
+      "last_basic": 61.77,
+      "url": "https://www.wildberries.by/catalog/672171989/detail.aspx",
+      "rating": 4.7,
+      "feedbacks": 2153
+    },
+    "1164358226": {
+      "name": "Фисташки жареные соленые 1 кг",
+      "last_price": 58.53,
+      "last_basic": 109.97,
+      "url": "https://www.wildberries.by/catalog/1164358226/detail.aspx",
+      "rating": 4.6,
+      "feedbacks": 82
+    },
+    "28443957": {
+      "name": "Кедровые орехи в скорлупе неочищенные, 900гр новый урожай",
+      "last_price": 68.7,
+      "last_basic": 101.21,
+      "url": "https://www.wildberries.by/catalog/28443957/detail.aspx",
+      "rating": 4.8,
+      "feedbacks": 3154
+    }
+  },
+  "onliner": {
+    "5908252006465": {
+      "name": "Finish Quantum Lemon (100 шт)",
+      "last_min_price": 46.99,
+      "last_max_price": 83.86,
+      "url": "https://catalog.onliner.by/dishwashertablet/finish/5908252006465",
+      "prices_url": "https://catalog.onliner.by/dishwashertablet/finish/5908252006465/prices",
+      "top3": [
+        {
+          "shop": "emall",
+          "price": 46.99,
+          "shop_url": "https://19926.shop.onliner.by",
+          "cashback": 0,
+          "cashback_pct": 0,
+          "delivery": "бесплатно",
+          "on_sale": true
+        },
+        {
+          "shop": "21vek",
+          "price": 50.5,
+          "shop_url": "https://965.shop.onliner.by",
+          "cashback": 0,
+          "cashback_pct": 0,
+          "delivery": "бесплатно",
+          "on_sale": false
+        },
+        {
+          "shop": "Golden",
+          "price": 59.84,
+          "shop_url": "https://21049.shop.onliner.by",
+          "cashback": 0,
+          "cashback_pct": 0,
+          "delivery": "",
+          "on_sale": false
+        }
+      ]
+    }
+  },
+  "last_check": "2026-07-03T23:40:57+0300"
+}
